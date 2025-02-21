@@ -1,33 +1,83 @@
-document.getElementById('contatoForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section");
 
-    const nome_completo = document.getElementById('nome_completo').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const telefone = document.getElementById('telefone').value.trim();
-    const mensagem = document.getElementById('mensagem').value.trim();
+    function checkScroll() {
+        sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
 
-    if (!nome_completo || !email || !mensagem) {
-        document.getElementById('mensagemStatus').innerText = "Preencha todos os campos obrigatórios!";
-        document.getElementById('mensagemStatus').style.color = "red";
-        return;
+            if (sectionTop < windowHeight - 100) {
+                section.classList.add("show");
+            }
+        });
     }
 
-    try {
-        const response = await fetch('http://localhost:3001/contato', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome_completo, email, telefone, mensagem })
+    window.addEventListener("scroll", checkScroll);
+    checkScroll(); // Para garantir que seções visíveis na tela já apareçam
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.area-btn');
+    const descriptionContainer = document.getElementById('area-description');
+
+    const descriptions = {
+        trabalhista: `
+            <h3>Direito Trabalhista</h3>
+            <p>O Direito Trabalhista regula as relações entre empregados e empregadores, garantindo que os direitos e deveres de ambas as partes sejam respeitados. Inclui questões como salários, férias, condições de trabalho e rescisão contratual. Nosso escritório auxilia tanto trabalhadores quanto empresas em processos trabalhistas.</p>
+        `,
+        previdenciario: `
+            <h3>Benefícios Previdenciários</h3>
+            <p>Os Benefícios Previdenciários garantem segurança financeira em momentos de necessidade, como aposentadoria, doença, acidente ou maternidade. Nossa equipe ajuda clientes a obter aposentadorias, auxílio-doença, pensão por morte e outros direitos previdenciários.</p>
+        `,
+        consumidor: `
+            <h3>Direito do Consumidor</h3>
+            <p>O Direito do Consumidor protege clientes em relações de consumo, assegurando que produtos e serviços atendam aos padrões de qualidade e transparência. Nossa equipe representa consumidores contra abusos, como publicidade enganosa e defeitos em produtos.</p>
+        `
+    };
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const areaKey = this.getAttribute('data-area');
+
+            if (descriptionContainer.classList.contains('active') && descriptionContainer.dataset.current === areaKey) {
+                // Se já estiver aberto, fecha ao clicar novamente
+                descriptionContainer.classList.remove('active');
+                setTimeout(() => {
+                    descriptionContainer.style.display = 'none';
+                    descriptionContainer.innerHTML = '';
+                }, 300);
+            } else {
+                // Atualiza o conteúdo e exibe
+                descriptionContainer.innerHTML = descriptions[areaKey];
+                descriptionContainer.style.display = 'block';
+                setTimeout(() => descriptionContainer.classList.add('active'), 10);
+                descriptionContainer.dataset.current = areaKey;
+            }
         });
+    });
+});
 
-        const data = await response.json();
-        document.getElementById('mensagemStatus').innerText = data.message;
-        document.getElementById('mensagemStatus').style.color = "green";
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".area-btn");
+    const textBox = document.querySelector("#area-info");
 
-        // Limpar o formulário após envio
-        document.getElementById('contatoForm').reset();
+    buttons.forEach(button => {
+        button.addEventListener("click", function() {
 
-    } catch (error) {
-        document.getElementById('mensagemStatus').innerText = "Erro ao enviar o formulário.";
-        document.getElementById('mensagemStatus').style.color = "red";
+            // Exibir a caixa de texto ao clicar
+            const selectedArea = this.getAttribute("data-area");
+            showAreaInfo(selectedArea);
+        });
+    });
+
+    function showAreaInfo(area) {
+        const infoText = {
+            "trabalhista": "O Direito Trabalhista protege os direitos dos trabalhadores...",
+            "previdenciario": "Os Benefícios Previdenciários garantem apoio financeiro...",
+            "consumidor": "O Direito do Consumidor protege os clientes de práticas abusivas..."
+        };
+
+        textBox.innerHTML = `<p>${infoText[area]}</p>`;
+        textBox.classList.add("show"); // Adiciona classe para animação
     }
 });
