@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seu Direito na Prática | Lívia Revoredo - Advocacia</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="../public/favicon.ico">
 </head>
 <body>
     <header>
@@ -31,7 +32,7 @@
         <div class="card">
             <h2>SOBRE A ADVOGADA</h2>
             <p>Advogada especializada em Direito Trabalhista e Benefícios Previdenciários. A Dra. Lívia Revoredo oferece assessoria jurídica para trabalhadores, aposentados e empresas, com foco em garantir seus direitos de forma eficiente e transparente.</p>
-            <img src="../images/livia-revoredo.jpeg" alt="Dra. Lívia Revoredo">
+            <img src="../public/images/livia-revoredo.jpeg" alt="Dra. Lívia Revoredo">
             <p class="nome">DRA. LÍVIA REVOREDO</p>
         </div>
     </section>
@@ -42,19 +43,19 @@
             <div class="icons">
                 <button class="area-btn" data-area="trabalhista">
                     <div class="icon-circle">
-                        <img src="../images/trabalho-icon.png" alt="Direito Trabalhista">
+                        <img src="../public/images/trabalho-icon.png" alt="Direito Trabalhista">
                     </div>
                     <p>Direito Trabalhista</p>
                 </button>
                 <button class="area-btn" data-area="previdenciario">
                     <div class="icon-circle">
-                        <img src="../images/previdencia-icon.png" alt="Benefícios Previdenciários">
+                        <img src="../public/images/previdencia-icon.png" alt="Benefícios Previdenciários">
                     </div>
                     <p>Benefícios Previdenciários</p>
                 </button>
                 <button class="area-btn" data-area="consumidor">
                     <div class="icon-circle">
-                        <img src="../images/consumidor-icon.png" alt="Direito do Consumidor">
+                        <img src="../public/images/consumidor-icon.png" alt="Direito do Consumidor">
                     </div>
                     <p>Direito do Consumidor</p>
                 </button>
@@ -79,17 +80,60 @@
         <h2>Nosso Escritório</h2>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.890227120114!2d-34.881038925621!3d-8.057838392252385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab18b90a7e8893%3A0xe1d8b0dbe2f5899d!2sR.%20da%20Aurora%2C%20295%20-%20Boa%20Vista%2C%20Recife%20-%20PE%2C%2050005-140!5e0!3m2!1sen!2sbr!4v1649783204907!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </section>
-    
+
+    <!-- Modal de Agendamento -->
+    <div id="modal-agendamento" class="modal hidden">
+        <div class="modal-content">
+            <h3>Por onde você prefere fazer o agendamento?</h3>
+            <div class="modal-buttons">
+                <!-- Botão de Agendamento por WhatsApp -->
+                <button id="btn-whatsapp" class="whatsapp-btn">
+                    <img src="images/whatsapp.png" alt="WhatsApp"> Agendamento por WhatsApp
+                </button>
+            
+                <!-- Botão de Agendamento pelo Site -->
+                <button id="btn-site">Agendamento pelo Site</button>
+            </div>
+
+            <!-- Formulário de Agendamento -->
+            <div id="form-agendamento" class="hidden">
+                <h3>Preencha os dados para o agendamento</h3>
+                <form id="agendamento-form">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+                
+                    <label for="contato">E-mail ou Telefone:</label>
+                    <input type="text" id="contato" name="contato" required>
+
+                    <label for="assunto">Assunto:</label>
+                    <textarea id="assunto" name="assunto" rows="4" required></textarea>
+
+                    <button type="submit" id="enviar-agendamento">Enviar</button>
+                </form>
+                <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso!</p>
+            </div>
+
+            <!-- Botão de Fechar o Modal -->
+            <span class="close-modal">&times;</span>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-left">
             <p>Me encontre nas redes sociais:</p>
             <a href="https://www.instagram.com/seu_direito_napratica/" target="_blank">
-                <img src="../images/instagram-icon.png" alt="Instagram">
+                <img src="../public/images/instagram-icon.png" alt="Instagram">
             </a>
         </div>
         <p class="credits">&copy; 2025 Lívia Revoredo - Advocacia e Consultoria Jurídica. Desenvolvido por Luana Braz</p>
     </footer>
     
     <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init("iujmYr34n5jNbHKyk");
+    </script>
+
 </body>
 </html>

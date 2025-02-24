@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@700&family=Tinos&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&display=swap');
 
 html {
     scroll-behavior: smooth;
@@ -93,7 +93,7 @@ nav ul li a:hover {
 
 /* Seção Hero */
 .hero {
-    background: url('../images/hero-bg.jpg') no-repeat center center;
+    background: url('../public/images/hero-bg.jpg') no-repeat center center;
     background-size: cover;
     height: 90vh;
     display: flex;
@@ -140,7 +140,7 @@ nav ul li a:hover {
 }
 
 .about p {
-    font-family: 'Tinos', serif;
+    font-family: 'Cormorant', serif;
     font-size: 16px;
     color: black;
     margin: 10px 0;
@@ -291,7 +291,7 @@ nav ul li a:hover {
     color: black;
     border-radius: 10px;
     text-align: center;
-    font-family: 'Tinos', serif;
+    font-family: 'Cormorant', serif;
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
     border: 2px solid #bc9c22;
     opacity: 0;
@@ -349,7 +349,7 @@ nav ul li a:hover {
     max-width: 600px;
     margin: 50px auto;
     text-align: center;
-    font-family: 'Tinos', serif;
+    font-family: 'Cormorant', serif;
 }
 
 .contact .card h2 {
@@ -363,7 +363,7 @@ nav ul li a:hover {
     font-size: 18px;
     color: black;
     margin: 10px 0;
-    font-family: 'Tinos', serif;
+    font-family: 'Cormorant', serif;
 }
 
 .contact .card p strong {
@@ -395,7 +395,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 4px 15px;
-    font-family: 'Tinos', serif;
+    font-family: 'Cormorant', serif;
     font-size: 12px;
 }
 
@@ -434,3 +434,170 @@ footer {
     font-size: 11px;
     text-align: right;
 }
+
+
+/* Estilo do Modal */
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h3 {
+    font-size: 20px;
+    color: black;
+    font-family: 'Cormorant SC', serif;
+    margin-bottom: 20px;
+}
+
+/* Botões dentro do Modal */
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Cormorant', serif;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Estilo do botão do WhatsApp */
+#btn-whatsapp {
+    background: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#btn-whatsapp img {
+    width: 20px;
+    height: 20px;
+}
+
+#btn-whatsapp:hover {
+    background: #1ebe5d;
+}
+
+/* Estilo do botão do site */
+#btn-site {
+    background: #bc9c22;
+    color: black;
+}
+
+#btn-site:hover {
+    background: #e0b42b;
+}
+
+/* Ícone de Fechar */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+/* Estilo do Formulário de Agendamento */
+#form-agendamento {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+#form-agendamento.show {
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    margin-top: 20px;
+}
+
+#form-agendamento form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#form-agendamento label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#form-agendamento input,
+#form-agendamento textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Cormorant', serif;
+}
+
+#form-agendamento button {
+    background: #bc9c22;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form-agendamento button:hover {
+    background: #e0b42b;
+}
+
+/* Mensagem de Sucesso */
+#mensagem-sucesso {
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#mensagem-sucesso.show {
+    opacity: 1;
+}
+

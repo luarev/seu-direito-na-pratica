@@ -100,3 +100,69 @@ document.querySelectorAll("nav a").forEach(link => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("modal-agendamento");
+    const agendamentoLink = document.querySelector('a[href="#agendamento"]');
+    const closeModal = document.querySelector(".close-modal");
+    const btnWhatsApp = document.getElementById("btn-whatsapp");
+    const btnSite = document.getElementById("btn-site");
+
+    agendamentoLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        modal.classList.remove("hidden");
+    });
+
+    closeModal.addEventListener("click", function() {
+        modal.classList.add("hidden");
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+
+    btnWhatsApp.addEventListener("click", function() {
+        window.open("https://wa.me/5581995369027?text=Olá, gostaria de agendar uma consulta.", "_blank");
+    });
+
+    btnSite.addEventListener("click", function() {
+        modal.classList.add("hidden");
+        document.querySelector("#form-agendamento").scrollIntoView({ behavior: "smooth" });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("modal-agendamento");
+    const btnAgendamento = document.querySelector("a[href='#agendamento']");
+    const btnSite = document.getElementById("btn-site");
+    const formAgendamento = document.getElementById("form-agendamento");
+    const closeModal = document.querySelector(".close-modal");
+
+    btnAgendamento.addEventListener("click", function(event) {
+        event.preventDefault();
+        modal.classList.remove("hidden");
+        modal.classList.add("show");
+    });
+
+    btnSite.addEventListener("click", function() {
+        formAgendamento.classList.remove("hidden");
+        formAgendamento.classList.add("show");
+    });
+
+    closeModal.addEventListener("click", function() {
+        modal.classList.remove("show");
+        modal.classList.add("hidden");
+        formAgendamento.classList.remove("show");
+        formAgendamento.classList.add("hidden");
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.classList.remove("show");
+            modal.classList.add("hidden");
+            formAgendamento.classList.remove("show");
+            formAgendamento.classList.add("hidden");
+        }
+    });
+});
