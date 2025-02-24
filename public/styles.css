@@ -90,6 +90,7 @@ nav ul li a:hover {
     color: #bc9c22;
 }
 
+
 /* Seção Hero */
 .hero {
     background: url('../images/hero-bg.jpg') no-repeat center center;
@@ -114,7 +115,6 @@ nav ul li a:hover {
 
 
 /* Sobre a Advogada */
-
 .about {
     display: flex;
     justify-content: center;
@@ -160,13 +160,17 @@ nav ul li a:hover {
     margin-top: 10px;
 }
 
-/* Áreas de Atuação */
-/* Áreas de Atuação */
+
+/*Área de Atuação*/
 .areas {
     text-align: center;
-    padding: 50px;
+    padding: 60px 20px;
     background-color: black;
     color: white;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .areas h2 {
@@ -212,8 +216,6 @@ nav ul li a:hover {
     color: white;
     transition: transform 0.3s ease;
 }
-
-/* Efeito de hover para destacar */
 .area:hover img {
     transform: scale(1.1); 
     border-color: #bc9c22; 
@@ -222,10 +224,6 @@ nav ul li a:hover {
 .area:hover p {
     transform: translateY(5px); 
 }
-
-
-
-
 /* Estilização da área de atuação */
 .areas-container {
     display: flex;
@@ -242,7 +240,6 @@ nav ul li a:hover {
     align-items: center;
 }
 
-/* Botões estilizados */
 .area-btn {
     background: none;
     border: none;
@@ -274,13 +271,11 @@ nav ul li a:hover {
     height: 60px;
 }
 
-/* Hover nos botões */
 .area-btn:hover .icon-circle {
     transform: scale(1.1);
     border-color: #bc9c22;
 }
 
-/* Caixa de descrição */
 .area-description-container {
     width: 50%;
     display: flex;
@@ -304,7 +299,6 @@ nav ul li a:hover {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Ativação da descrição */
 .area-description.active {
     display: block;
     opacity: 1;
@@ -331,9 +325,6 @@ nav ul li a:hover {
 }
 
 
-
-
-
 /* Contato */
 .contact {
     text-align: center;
@@ -347,6 +338,39 @@ nav ul li a:hover {
     color: #bc9c22;
     font-size: 18px;
 }
+/* Estilização do Card para Contato */
+.contact .card {
+    background-color: white;
+    color: black;
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #bc9c22;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: 'Tinos', serif;
+}
+
+.contact .card h2 {
+    font-family: 'Cormorant SC', serif;
+    font-size: 24px;
+    color: #bc9c22;
+    margin-bottom: 20px;
+}
+
+.contact .card p {
+    font-size: 18px;
+    color: black;
+    margin: 10px 0;
+    font-family: 'Tinos', serif;
+}
+
+.contact .card p strong {
+    color: #bc9c22;
+}
+
+
 
 /* Mapa */
 .map {
@@ -362,6 +386,7 @@ iframe {
     border-radius: 10px;
 }
 
+
 /* Rodapé */
 footer {
     background-color: #bc9c22;
@@ -369,7 +394,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 15px; /* Padding reduzido para diminuir a altura */
+    padding: 4px 15px;
     font-family: 'Tinos', serif;
     font-size: 12px;
 }
@@ -377,7 +402,7 @@ footer {
 .footer-left {
     display: flex;
     align-items: center;
-    gap: 8px; /* Espaço entre o texto e o ícone */
+    gap: 8px;
 }
 
 .footer-left p {
@@ -388,15 +413,15 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 26px; /* Tamanho do botão */
+    width: 26px;
     height: 26px;
-    background-color: #bc9c22; /* Cor de fundo do botão */
-    border-radius: 50%; /* Transforma em círculo */
+    background-color: #bc9c22;
+    border-radius: 50%;
     transition: 0.3s ease-in-out;
 }
 
 .footer-left a:hover {
-    background-color: #8c7417; /* Muda de cor ao passar o mouse */
+    background-color: #8c7417;
 }
 
 .footer-left img {
@@ -405,12 +430,7 @@ footer {
     
 }
 
-
-
 .credits {
     font-size: 11px;
     text-align: right;
 }
-
-
-

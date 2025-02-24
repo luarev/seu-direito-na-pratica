@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     window.addEventListener("scroll", checkScroll);
-    checkScroll(); // Para garantir que seções visíveis na tela já apareçam
+    checkScroll();
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -64,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
     buttons.forEach(button => {
         button.addEventListener("click", function() {
 
-            // Exibir a caixa de texto ao clicar
             const selectedArea = this.getAttribute("data-area");
             showAreaInfo(selectedArea);
         });
@@ -78,6 +77,26 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         textBox.innerHTML = `<p>${infoText[area]}</p>`;
-        textBox.classList.add("show"); // Adiciona classe para animação
+        textBox.classList.add("show");
     }
 });
+
+document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute("href").substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+            const offset = 120;
+            const targetPosition = targetSection.offsetTop - offset;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+        }
+    });
+});
+
