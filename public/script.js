@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `,
         previdenciario: `
             <h3>Benefícios Previdenciários</h3>
-            <p>Os Benefícios Previdenciários garantem segurança financeira em momentos de necessidade, como aposentadoria, doença, acidente ou maternidade. Nossa equipe ajuda clientes a obter aposentadorias, auxílio-doença, pensão por morte e outros direitos previdenciários.</p>
+            <p>Os Benefícios Previdenciários garantem segurança financeira em momentos de necessidade, como aposentadoria, doença, acidente ou maternidade. Nossa equipe ajuda clientes a obter aposentadorias, auxílio por incapacidade temporária, pensão por morte e outros direitos previdenciários.</p>
         `,
         consumidor: `
             <h3>Direito do Consumidor</h3>
