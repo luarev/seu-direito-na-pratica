@@ -18,7 +18,8 @@
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#areas">Áreas de Atuação</a></li>
                     <li><a href="#contato">Contato</a></li>
-                    <li><a href="#agendamento">Agendamento Online</a></li>
+                    <li><a href="#" id="btn-agendamento">Agendamento Online</a></li>
+
                 </ul>
             </div>
         </nav>
@@ -82,47 +83,52 @@
     </section>
 
     <!-- Modal de Agendamento -->
-    <div id="modal-agendamento" class="modal hidden">
-        <div class="modal-content">
-            <h3>Por onde você prefere fazer o agendamento?</h3>
-            <div class="modal-buttons">
-                <!-- Botão de Agendamento por WhatsApp -->
-                <button id="btn-whatsapp" class="whatsapp-btn">
-                    <img src="images/whatsapp.png" alt="WhatsApp"> Agendamento por WhatsApp
-                </button>
-            
-                <!-- Botão de Agendamento pelo Site -->
-                <button id="btn-site">Agendamento pelo Site</button>
-            </div>
+<div id="modal-agendamento" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span> <!-- Botão para fechar o modal -->
+        <h3>Por onde você prefere fazer o agendamento?</h3>
 
-            <!-- Formulário de Agendamento -->
-            <div id="form-agendamento" class="hidden">
-                <h3>Preencha os dados para o agendamento</h3>
-                <form id="agendamento-form">
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="nome" required>
-                
-                    <label for="contato">E-mail ou Telefone:</label>
-                    <input type="text" id="contato" name="contato" required>
+        <!-- Escolha entre WhatsApp ou Site -->
+        <div class="escolha-agendamento">
+            <button id="btn-whatsapp" class="whatsapp-btn">
+                <img src="images/whatsapp.png" alt="WhatsApp"> Agendamento por WhatsApp
+            </button>
+            <button id="btn-site">Agendamento pelo Site</button>
+        </div>
+        
+        <!-- Formulário de Agendamento pelo Site -->
+        <div id="form-agendamento" class="hidden">
+            <button id="btn-voltar" class="back-btn">← Voltar</button> <!-- Botão de voltar -->
+            <h3>Preencha os dados para o agendamento</h3>
+            <form id="agendamento-form">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
 
-                    <label for="assunto">Assunto:</label>
-                    <textarea id="assunto" name="assunto" rows="4" required></textarea>
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" required>
 
-                    <button type="submit" id="enviar-agendamento">Enviar</button>
-                </form>
-                <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso!</p>
-            </div>
+                <label for="contato">Email:</label>
+                <input type="text" id="contato" name="contato" required>
 
-            <!-- Botão de Fechar o Modal -->
-            <span class="close-modal">&times;</span>
+                <label for="assunto">Assunto:</label>
+                <textarea id="assunto" name="assunto" rows="3" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+
+            <!-- Mensagem de sucesso -->
+            <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso! A Dra. Lívia entrará em contato assim que possível.</p>
         </div>
     </div>
+</div>
+
+
 
     <footer>
         <div class="footer-left">
             <p>Me encontre nas redes sociais:</p>
             <a href="https://www.instagram.com/seu_direito_napratica/" target="_blank">
-                <img src="../public/images/instagram-icon.png" alt="Instagram">
+                <img src="images/instagram-icon.png" alt="Instagram">
             </a>
         </div>
         <p class="credits">&copy; 2025 Lívia Revoredo - Advocacia e Consultoria Jurídica. Desenvolvido por Luana Braz</p>

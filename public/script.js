@@ -100,69 +100,89 @@ document.querySelectorAll("nav a").forEach(link => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("modal-agendamento");
-    const agendamentoLink = document.querySelector('a[href="#agendamento"]');
-    const closeModal = document.querySelector(".close-modal");
+    const btnAgendamento = document.getElementById("btn-agendamento");
+    const btnFechar = document.querySelector(".close-modal");
     const btnWhatsApp = document.getElementById("btn-whatsapp");
     const btnSite = document.getElementById("btn-site");
-
-    agendamentoLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        modal.classList.remove("hidden");
-    });
-
-    closeModal.addEventListener("click", function() {
-        modal.classList.add("hidden");
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === modal) {
-            modal.classList.add("hidden");
-        }
-    });
-
-    btnWhatsApp.addEventListener("click", function() {
-        window.open("https://wa.me/5581995369027?text=Olá, gostaria de agendar uma consulta.", "_blank");
-    });
-
-    btnSite.addEventListener("click", function() {
-        modal.classList.add("hidden");
-        document.querySelector("#form-agendamento").scrollIntoView({ behavior: "smooth" });
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("modal-agendamento");
-    const btnAgendamento = document.querySelector("a[href='#agendamento']");
-    const btnSite = document.getElementById("btn-site");
     const formAgendamento = document.getElementById("form-agendamento");
-    const closeModal = document.querySelector(".close-modal");
+    const escolhaAgendamento = document.querySelector(".escolha-agendamento");
+    const btnVoltar = document.getElementById("btn-voltar");
+    const mensagemSucesso = document.getElementById("mensagem-sucesso");
 
-    btnAgendamento.addEventListener("click", function(event) {
-        event.preventDefault();
-        modal.classList.remove("hidden");
-        modal.classList.add("show");
-    });
+    // Abrir modal ao clicar em "Agendamento Online"
+    if (btnAgendamento) {
+        btnAgendamento.addEventListener("click", function () {
+            modal.classList.add("show");
+        });
+    }
 
-    btnSite.addEventListener("click", function() {
-        formAgendamento.classList.remove("hidden");
-        formAgendamento.classList.add("show");
-    });
-
-    closeModal.addEventListener("click", function() {
-        modal.classList.remove("show");
-        modal.classList.add("hidden");
-        formAgendamento.classList.remove("show");
-        formAgendamento.classList.add("hidden");
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === modal) {
+    // Fechar modal ao clicar no X
+    if (btnFechar) {
+        btnFechar.addEventListener("click", function () {
             modal.classList.remove("show");
-            modal.classList.add("hidden");
+        });
+    }
+
+    // Redirecionar para WhatsApp
+    if (btnWhatsApp) {
+        btnWhatsApp.addEventListener("click", function () {
+            window.open("https://wa.me/5581995369027", "_blank");
+        });
+    }
+
+    // Exibir Formulário de Agendamento
+    if (btnSite) {
+        btnSite.addEventListener("click", function () {
+            escolhaAgendamento.style.display = "none";
+            formAgendamento.classList.add("show");
+        });
+    }
+
+    // Voltar para escolha inicial
+    if (btnVoltar) {
+        btnVoltar.addEventListener("click", function () {
             formAgendamento.classList.remove("show");
-            formAgendamento.classList.add("hidden");
-        }
-    });
+            escolhaAgendamento.style.display = "block";
+        });
+    }
+
+    // Envio do formulário via EmailJS
+    if (formAgendamento) {
+        formAgendamento.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Captura dos dados do formulário
+            const nome = document.getElementById("nome").value;
+            const idade = document.getElementById("idade").value;
+            const contato = document.getElementById("contato").value;
+            const assunto = document.getElementById("assunto").value;
+
+            // Configuração do EmailJS
+            emailjs.send("service_xxxxx", "template_xxxxx", {
+                from_name: nome,
+                age: idade,
+                reply_to: contato,
+                message: assunto
+            }).then(
+                function (response) {
+                    console.log("Email enviado com sucesso!", response);
+                    mensagemSucesso.classList.add("show");
+
+                    // Fechar automaticamente após 10 segundos
+                    setTimeout(function () {
+                        modal.classList.remove("show");
+                        formAgendamento.reset();
+                        mensagemSucesso.classList.remove("show");
+                        escolhaAgendamento.style.display = "block";
+                        formAgendamento.classList.remove("show");
+                    }, 10000);
+                },
+                function (error) {
+                    console.error("Erro ao enviar email:", error);
+                }
+            );
+        });
+    }
 });
