@@ -93,7 +93,7 @@ nav ul li a:hover {
 
 /* Seção Hero */
 .hero {
-    background: url('../public/images/hero-bg.jpg') no-repeat center center;
+    background: url('images/hero-bg.jpg') no-repeat center center;
     background-size: cover;
     height: 90vh;
     display: flex;
