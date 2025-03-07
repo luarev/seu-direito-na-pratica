@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;500;600;700&display=swap');
 
 
 
@@ -57,7 +57,7 @@ html {
 }
 
 body {
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 1rem;
     margin: 0;
     padding: 0;
@@ -198,7 +198,7 @@ nav ul li a:hover {
 }
 
 .about p {
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 16px;
     color: black;
     margin: 10px 0;
@@ -232,7 +232,7 @@ nav ul li a:hover {
 }
 
 .areas h2 {
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Times New Roman', serif;
     color: #bc9c22;
     font-size: 32px;
     margin-bottom: 40px;
@@ -258,13 +258,13 @@ nav ul li a:hover {
 }
 
 .area img {
-    width: 80px; /* Reduzi um pouco o tamanho do ícone */
+    width: 80px;
     height: 80px;
     display: block;
     margin: auto;
-    padding: 20px; /* Aumentei o padding para dar mais espaço */
+    padding: 20px;
     border-radius: 50%;
-    border: 3px solid white; /* Bordas ligeiramente mais grossas */
+    border: 3px solid white;
     background-color: black; 
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -272,7 +272,7 @@ nav ul li a:hover {
 .area p {
     margin-top: 10px;
     font-size: 16px;
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Times New Roman', serif;
     font-weight: bold;
     color: white;
     transition: transform 0.3s ease;
@@ -285,7 +285,7 @@ nav ul li a:hover {
 .area:hover p {
     transform: translateY(5px); 
 }
-/* Estilização da área de atuação */
+
 .areas-container {
     display: flex;
     flex-direction: column;
@@ -294,19 +294,12 @@ nav ul li a:hover {
     margin-top: 30px;
 }
 
-.icons {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    align-items: center;
-}
-
 .area-btn {
     background: none;
     border: none;
     cursor: pointer;
     text-align: center;
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 16px;
     color: white;
     display: flex;
@@ -352,12 +345,12 @@ nav ul li a:hover {
     color: black;
     border-radius: 10px;
     text-align: center;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
     border: 2px solid #bc9c22;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .area-description.active {
@@ -385,7 +378,6 @@ nav ul li a:hover {
     display: none;
 }
 
-
 /* Contato */
 .contact {
     text-align: center;
@@ -399,7 +391,7 @@ nav ul li a:hover {
     color: #bc9c22;
     font-size: 18px;
 }
-/* Estilização do Card para Contato */
+
 .contact .card {
     background-color: white;
     color: black;
@@ -410,11 +402,11 @@ nav ul li a:hover {
     max-width: 600px;
     margin: 50px auto;
     text-align: center;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
 }
 
 .contact .card h2 {
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 24px;
     color: #bc9c22;
     margin-bottom: 20px;
@@ -424,7 +416,7 @@ nav ul li a:hover {
     font-size: 18px;
     color: black;
     margin: 10px 0;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
 }
 
 .contact .card p strong {
@@ -456,7 +448,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 4px 15px;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 12px;
 }
 
@@ -495,6 +487,9 @@ footer {
     font-size: 11px;
     text-align: right;
 }
+
+/* Oculta elementos suavemente */
+
 
 
 /* Modal - Janela Principal */
@@ -535,7 +530,7 @@ footer {
 .modal-content h3 {
     font-size: 20px;
     color: black;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -549,74 +544,60 @@ footer {
     color: black;
 }
 
-
 .escolha-agendamento {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center; /* Centraliza os botões */
+    gap: 20px; /* Espaço entre os botões */
     margin-top: 20px;
 }
 
+
 .escolha-agendamento button {
-    width: 90%; /* Ajuste para manter os botões responsivos */
-    padding: 12px; /* Ajuste do padding para maior equilíbrio */
-    font-family: 'Cormorant Infant', serif;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px; /* Deixa os botões com cantos levemente arredondados */
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
-#btn-whatsapp {
-    background: #25D366;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    width: 90%; /* Mantém responsivo */
     padding: 12px;
+    font-family: 'Times New Roman', serif;
     font-size: 18px;
-    font-family: 'Cormorant Infant', serif;
     font-weight: bold;
-    border-radius: 5px;
-    width: 100%;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    background: black;
+    color: #bc9c22; /* Dourado */
 }
 
-
-#btn-whatsapp img {
-    width: 22px;
-    height: 22px;
-}
-
-#btn-whatsapp:hover {
-    background: #1ebe5d;
-}
-
-#btn-site {
-    background: #bc9c22;
-    color: black;
+/* Botões da Escolha de Agendamento - Agora padronizados */
+.agendamento-btn {
+    width: 80%; /* Ajuste para manter os botões em um tamanho ideal */
     padding: 12px;
+    font-family: 'Times New Roman', serif;
     font-size: 18px;
-    font-family: 'Cormorant Infant', serif;
     font-weight: bold;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
+    border: 2px solid #bc9c22; /* Borda dourada */
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: black; /* Fundo preto padrão */
+    color: #bc9c22; /* Texto dourado */
+    text-align: center;
+    box-shadow: 0px 0px 15px black;
 }
 
-#btn-site:hover {
-    background: #e0b42b;
+.agendamento-btn:hover,
+.agendamento-btn:focus {
+    background: #bc9c22; /* Dourado */
+    color: black; /* Texto preto */
+    box-shadow: 0px 0px 15px #bc9c22;
 }
+
+
+
+
+
 
 /* Estilo do Formulário */
 #form-agendamento {
-    display: none;
     opacity: 0;
     visibility: hidden;
     height: 0;
@@ -626,7 +607,6 @@ footer {
 
 /* Mostrar o Formulário */
 #form-agendamento.show {
-    display: block;
     opacity: 1;
     visibility: visible;
     height: auto;
@@ -654,7 +634,7 @@ footer {
 }
 
 #form-agendamento label {
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
     font-size: 16px;
     font-weight: bold;
     text-align: left;
@@ -667,7 +647,7 @@ footer {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    font-family: 'Cormorant Infant', serif;
+    font-family: 'Times New Roman', serif;
 }
 
 /* Botão de Enviar */

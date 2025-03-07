@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     checkScroll();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.area-btn');
-    const descriptionContainer = document.getElementById('area-description');
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".area-btn");
+    const descriptionContainer = document.getElementById("area-description");
 
     const descriptions = {
         trabalhista: `
@@ -36,49 +36,29 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            const areaKey = this.getAttribute('data-area');
+        button.addEventListener("click", function () {
+            const areaKey = this.getAttribute("data-area");
 
-            if (descriptionContainer.classList.contains('active') && descriptionContainer.dataset.current === areaKey) {
-                // Se já estiver aberto, fecha ao clicar novamente
-                descriptionContainer.classList.remove('active');
+            if (descriptionContainer.dataset.current === areaKey) {
+                // Se a mesma área já estiver aberta, fecha
+                descriptionContainer.classList.remove("active");
+                descriptionContainer.dataset.current = "";
                 setTimeout(() => {
-                    descriptionContainer.style.display = 'none';
-                    descriptionContainer.innerHTML = '';
+                    descriptionContainer.style.display = "none";
+                    descriptionContainer.innerHTML = "";
                 }, 300);
             } else {
-                // Atualiza o conteúdo e exibe
-                descriptionContainer.innerHTML = descriptions[areaKey];
-                descriptionContainer.style.display = 'block';
-                setTimeout(() => descriptionContainer.classList.add('active'), 10);
-                descriptionContainer.dataset.current = areaKey;
+                // Esconde qualquer descrição anterior
+                descriptionContainer.classList.remove("active");
+                setTimeout(() => {
+                    descriptionContainer.innerHTML = descriptions[areaKey];
+                    descriptionContainer.style.display = "block";
+                    setTimeout(() => descriptionContainer.classList.add("active"), 10);
+                    descriptionContainer.dataset.current = areaKey;
+                }, 300);
             }
         });
     });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll(".area-btn");
-    const textBox = document.querySelector("#area-info");
-
-    buttons.forEach(button => {
-        button.addEventListener("click", function() {
-
-            const selectedArea = this.getAttribute("data-area");
-            showAreaInfo(selectedArea);
-        });
-    });
-
-    function showAreaInfo(area) {
-        const infoText = {
-            "trabalhista": "O Direito Trabalhista protege os direitos dos trabalhadores...",
-            "previdenciario": "Os Benefícios Previdenciários garantem apoio financeiro...",
-            "consumidor": "O Direito do Consumidor protege os clientes de práticas abusivas..."
-        };
-
-        textBox.innerHTML = `<p>${infoText[area]}</p>`;
-        textBox.classList.add("show");
-    }
 });
 
 document.querySelectorAll("nav a").forEach(link => {
@@ -89,7 +69,7 @@ document.querySelectorAll("nav a").forEach(link => {
         const targetSection = document.getElementById(targetId);
 
         if (targetSection) {
-            const offset = 120;
+            const offset = window.innerHeight / 5.5;
             const targetPosition = targetSection.offsetTop - offset;
 
             window.scrollTo({
@@ -111,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnVoltar = document.getElementById("btn-voltar");
     const mensagemSucesso = document.getElementById("mensagem-sucesso");
 
-    // Abrir modal ao clicar em "Agendamento Online"
     if (btnAgendamento) {
         btnAgendamento.addEventListener("click", function () {
             modal.classList.add("show");
@@ -122,6 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btnFechar) {
         btnFechar.addEventListener("click", function () {
             modal.classList.remove("show");
+            // Quando fechar o modal, restaurar os botões para evitar problemas de exibição
+            setTimeout(() => {
+                escolhaAgendamento.style.display = "flex";
+                formAgendamento.style.display = "none";
+                formAgendamento.classList.remove("show");
+            }, 300);
         });
     }
 
@@ -135,16 +120,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // Exibir Formulário de Agendamento
     if (btnSite) {
         btnSite.addEventListener("click", function () {
-            escolhaAgendamento.style.display = "none";
-            formAgendamento.classList.add("show");
+            perguntaAgendamento.style.opacity = "0"; // Esconde suavemente
+            setTimeout(() => perguntaAgendamento.style.display = "none", 300); // Remove após animação
+
+            escolhaAgendamento.classList.add("hidden"); // Esconde a escolha inicial
+            formAgendamento.classList.remove("hidden"); // Exibe o formulário
+            setTimeout(() => formAgendamento.classList.add("show"), 10); // Animação suave
         });
     }
 
-    // Voltar para escolha inicial
+    // Voltar para escolha inicial e garantir que os botões sejam restaurados corretamente
     if (btnVoltar) {
         btnVoltar.addEventListener("click", function () {
             formAgendamento.classList.remove("show");
-            escolhaAgendamento.style.display = "block";
+            setTimeout(() => {
+                formAgendamento.classList.add("hidden");
+                escolhaAgendamento.classList.remove("hidden");
+                perguntaAgendamento.style.display = "block"; // Reexibe a pergunta
+                setTimeout(() => perguntaAgendamento.style.opacity = "1", 10); // Animação de volta
+            }, 300);
         });
     }
 
@@ -175,7 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         modal.classList.remove("show");
                         formAgendamento.reset();
                         mensagemSucesso.classList.remove("show");
-                        escolhaAgendamento.style.display = "block";
+                        escolhaAgendamento.style.display = "flex";
+                        formAgendamento.style.display = "none";
                         formAgendamento.classList.remove("show");
                     }, 10000);
                 },

@@ -87,16 +87,16 @@
 <div id="modal-agendamento" class="modal hidden">
     <div class="modal-content">
         <span class="close-modal">&times;</span> <!-- Botão para fechar o modal -->
-        <h3>Por onde você prefere fazer o agendamento?</h3>
+        
+        <!-- Pergunta do modal (será oculta ao abrir o formulário) -->
+        <h3 id="pergunta-agendamento">Por onde você prefere fazer o agendamento?</h3>
 
         <!-- Escolha entre WhatsApp ou Site -->
-        <div class="escolha-agendamento">
-            <button id="btn-whatsapp" class="whatsapp-btn">
-                <img src="images/whatsapp.png" alt="WhatsApp"> Agendamento por WhatsApp
-            </button>
-            <button id="btn-site">Agendamento pelo Site</button>
+        <div id="escolha-agendamento" class="escolha-agendamento">
+            <button id="btn-whatsapp" class="agendamento-btn">Agendamento por WhatsApp</button>
+            <button id="btn-site" class="agendamento-btn">Agendamento pelo Site</button>
         </div>
-        
+
         <!-- Formulário de Agendamento pelo Site -->
         <div id="form-agendamento" class="hidden">
             <button id="btn-voltar" class="back-btn">← Voltar</button> <!-- Botão de voltar -->
@@ -109,12 +109,12 @@
                 <input type="number" id="idade" name="idade" required>
 
                 <label for="contato">Email:</label>
-                <input type="text" id="contato" name="contato" required>
+                <input type="email" id="contato" name="contato" required>
 
                 <label for="assunto">Assunto:</label>
                 <textarea id="assunto" name="assunto" rows="3" required></textarea>
 
-                <button type="submit">Enviar</button>
+                <button type="submit" class="agendamento-btn">Enviar</button>
             </form>
 
             <!-- Mensagem de sucesso -->
@@ -122,6 +122,7 @@
         </div>
     </div>
 </div>
+
 
 
 
