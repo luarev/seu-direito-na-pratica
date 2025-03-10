@@ -86,74 +86,70 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnFechar = document.querySelector(".close-modal");
     const btnWhatsApp = document.getElementById("btn-whatsapp");
     const btnSite = document.getElementById("btn-site");
-    const formAgendamento = document.getElementById("form-agendamento");
-    const escolhaAgendamento = document.querySelector(".escolha-agendamento");
+    const formAgendamento = document.getElementById('form-agendamento');
+    const escolhaAgendamento = document.getElementById("escolha-agendamento");
     const btnVoltar = document.getElementById("btn-voltar");
+    const perguntaAgendamento = document.getElementById("pergunta-agendamento");
     const mensagemSucesso = document.getElementById("mensagem-sucesso");
 
-    if (btnAgendamento) {
-        btnAgendamento.addEventListener("click", function () {
-            modal.classList.add("show");
-        });
+    // Função para abrir o modal
+    function abrirModal() {
+        modal.classList.remove("hidden");
+        modal.classList.add("show");
     }
 
-    // Fechar modal ao clicar no X
-    if (btnFechar) {
-        btnFechar.addEventListener("click", function () {
-            modal.classList.remove("show");
-            // Quando fechar o modal, restaurar os botões para evitar problemas de exibição
-            setTimeout(() => {
-                escolhaAgendamento.style.display = "flex";
-                formAgendamento.style.display = "none";
-                formAgendamento.classList.remove("show");
-            }, 300);
-        });
+    // Função para fechar o modal
+    function fecharModal() {
+        modal.classList.remove("show");
+        modal.classList.add("hidden");
+        // Restaurar para estado inicial
+        setTimeout(() => {
+            escolhaAgendamento.classList.remove("hidden");
+            formAgendamento.classList.remove("show");
+            formAgendamento.classList.add("hidden");
+            perguntaAgendamento.style.display = "block";
+        }, 300);
     }
+
+    // Abrir o modal ao clicar em "Agendamento Online"
+    btnAgendamento.addEventListener("click", abrirModal);
+
+    // Fechar o modal ao clicar no botão "X"
+    btnFechar.addEventListener("click", fecharModal);
 
     // Redirecionar para WhatsApp
-    if (btnWhatsApp) {
-        btnWhatsApp.addEventListener("click", function () {
-            window.open("https://wa.me/5581995369027", "_blank");
-        });
-    }
+    btnWhatsApp.addEventListener("click", function () {
+        window.open("https://wa.me/5581995369027", "_blank");
+    });
 
-    // Exibir Formulário de Agendamento
-    if (btnSite) {
-        btnSite.addEventListener("click", function () {
-            perguntaAgendamento.style.opacity = "0"; // Esconde suavemente
-            setTimeout(() => perguntaAgendamento.style.display = "none", 300); // Remove após animação
+    // Exibir o formulário e esconder a pergunta inicial
+    btnSite.addEventListener("click", function () {
+        escolhaAgendamento.classList.add("hidden");
+        perguntaAgendamento.style.display = "none"; // Esconde a pergunta
+        formAgendamento.classList.remove("hidden");
+        setTimeout(() => formAgendamento.classList.add("show"), 10);
+    });
 
-            escolhaAgendamento.classList.add("hidden"); // Esconde a escolha inicial
-            formAgendamento.classList.remove("hidden"); // Exibe o formulário
-            setTimeout(() => formAgendamento.classList.add("show"), 10); // Animação suave
-        });
-    }
-
-    // Voltar para escolha inicial e garantir que os botões sejam restaurados corretamente
-    if (btnVoltar) {
-        btnVoltar.addEventListener("click", function () {
-            formAgendamento.classList.remove("show");
-            setTimeout(() => {
-                formAgendamento.classList.add("hidden");
-                escolhaAgendamento.classList.remove("hidden");
-                perguntaAgendamento.style.display = "block"; // Reexibe a pergunta
-                setTimeout(() => perguntaAgendamento.style.opacity = "1", 10); // Animação de volta
-            }, 300);
-        });
-    }
+    // Voltar para a escolha inicial
+    btnVoltar.addEventListener("click", function () {
+        formAgendamento.classList.remove("show");
+        setTimeout(() => {
+            formAgendamento.classList.add("hidden");
+            escolhaAgendamento.classList.remove("hidden");
+            perguntaAgendamento.style.display = "block"; // Exibir a pergunta novamente
+        }, 300);
+    });
 
     // Envio do formulário via EmailJS
     if (formAgendamento) {
         formAgendamento.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // Captura dos dados do formulário
             const nome = document.getElementById("nome").value;
             const idade = document.getElementById("idade").value;
             const contato = document.getElementById("contato").value;
             const assunto = document.getElementById("assunto").value;
 
-            // Configuração do EmailJS
             emailjs.send("service_xxxxx", "template_xxxxx", {
                 from_name: nome,
                 age: idade,
@@ -164,14 +160,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log("Email enviado com sucesso!", response);
                     mensagemSucesso.classList.add("show");
 
-                    // Fechar automaticamente após 10 segundos
                     setTimeout(function () {
-                        modal.classList.remove("show");
+                        fecharModal();
                         formAgendamento.reset();
                         mensagemSucesso.classList.remove("show");
-                        escolhaAgendamento.style.display = "flex";
-                        formAgendamento.style.display = "none";
-                        formAgendamento.classList.remove("show");
                     }, 10000);
                 },
                 function (error) {

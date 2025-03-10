@@ -375,7 +375,15 @@ nav ul li a:hover {
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.3s ease-in-out;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Contato */
@@ -513,18 +521,19 @@ footer {
 .modal.show {
     visibility: visible;
     opacity: 1;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 /* Conteúdo do Modal */
 .modal-content {
-    background: white;
+    width: 500px;
+    max-width: 90%;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    width: 450px; /* Largura maior */
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    position: relative;
-    animation: fadeIn 0.3s ease-in-out;
+    background: white;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    transition: all 0.3s ease-in-out;
 }
 
 .modal-content h3 {
@@ -540,8 +549,14 @@ footer {
     top: 10px;
     right: 15px;
     font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
     color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.close-modal:hover {
+    color: #bc9c22; /* Dourado ao passar o mouse */
 }
 
 .escolha-agendamento {
@@ -568,23 +583,27 @@ footer {
 }
 
 /* Botões da Escolha de Agendamento - Agora padronizados */
-.agendamento-btn {
-    width: 80%; /* Ajuste para manter os botões em um tamanho ideal */
+.agendamento-btn, #btn-voltar, #form-agendamento button {
+    width: 100%;
     padding: 12px;
-    font-family: 'Times New Roman', serif;
     font-size: 18px;
     font-weight: bold;
-    border: 2px solid #bc9c22; /* Borda dourada */
+    border: 2px solid #bc9c22;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    background: black; /* Fundo preto padrão */
-    color: #bc9c22; /* Texto dourado */
+    background: black;
+    color: #bc9c22;
     text-align: center;
-    box-shadow: 0px 0px 15px black;
+    box-shadow: 0px 0px 10px black;
 }
 
-.agendamento-btn:hover,
+.agendamento-btn:hover, #btn-voltar:hover, #form-agendamento button:hover {
+    background: #bc9c22;
+    color: black;
+    box-shadow: 0px 0px 10px #bc9c22;
+}
+
 .agendamento-btn:focus {
     background: #bc9c22; /* Dourado */
     color: black; /* Texto preto */
@@ -598,32 +617,34 @@ footer {
 
 /* Estilo do Formulário */
 #form-agendamento {
+    display: none;
     opacity: 0;
     visibility: hidden;
-    height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-/* Mostrar o Formulário */
 #form-agendamento.show {
+    display: block;
     opacity: 1;
     visibility: visible;
-    height: auto;
-    margin-top: 20px;
 }
 
 /* Botão de Voltar */
 .back-btn {
-    background: none;
+    background: black;
+    color: #bc9c22;
     border: none;
     font-size: 16px;
-    cursor: pointer;
-    text-align: left;
-    color: #bc9c22;
     font-weight: bold;
-    margin-bottom: 10px;
-    display: block;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.back-btn:hover {
+    background: #bc9c22;
+    color: black;
 }
 
 /* Campos do Formulário */
@@ -632,6 +653,7 @@ footer {
     flex-direction: column;
     gap: 10px;
 }
+
 
 #form-agendamento label {
     font-family: 'Times New Roman', serif;
@@ -647,23 +669,6 @@ footer {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    font-family: 'Times New Roman', serif;
-}
-
-/* Botão de Enviar */
-#form-agendamento button {
-    background: #bc9c22;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#form-agendamento button:hover {
-    background: #e0b42b;
 }
 
 /* Mensagem de Sucesso */
