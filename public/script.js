@@ -83,7 +83,7 @@ document.querySelectorAll("nav a").forEach(link => {
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("modal-agendamento");
     const btnAgendamento = document.getElementById("btn-agendamento");
-    const btnFechar = document.querySelector(".close-modal");
+    const btnFechar = document.getElementById("btn-fechar");
     const btnWhatsApp = document.getElementById("btn-whatsapp");
     const btnSite = document.getElementById("btn-site");
     const formAgendamento = document.getElementById('form-agendamento');
@@ -100,22 +100,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para fechar o modal
     function fecharModal() {
-        modal.classList.remove("show");
-        modal.classList.add("hidden");
-        // Restaurar para estado inicial
+        modal.classList.remove("show"); // Remove a classe que exibe o modal
+        modal.style.opacity = "0"; // Adiciona transição suave
         setTimeout(() => {
+            modal.classList.add("hidden"); // Oculta completamente após a transição
             escolhaAgendamento.classList.remove("hidden");
             formAgendamento.classList.remove("show");
             formAgendamento.classList.add("hidden");
             perguntaAgendamento.style.display = "block";
-        }, 300);
+        }, 300); // Tempo para animação de fade-out
     }
 
     // Abrir o modal ao clicar em "Agendamento Online"
     btnAgendamento.addEventListener("click", abrirModal);
 
-    // Fechar o modal ao clicar no botão "X"
-    btnFechar.addEventListener("click", fecharModal);
+     // Evento para fechar o modal ao clicar no botão "X"
+     btnFechar.addEventListener("click", function () {
+        modal.classList.remove("show");
+        modal.classList.add("hidden");
+
+        setTimeout(() => {
+            document.getElementById("escolha-agendamento").classList.remove("hidden");
+            document.getElementById("form-agendamento").classList.add("hidden");
+            document.getElementById("pergunta-agendamento").style.display = "block";
+        }, 300);
+    });
 
     // Redirecionar para WhatsApp
     btnWhatsApp.addEventListener("click", function () {
