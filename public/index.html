@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://www.seudireitonapratica.com.br/">
+    <meta property="og:title" content="Seu Direito na Prática | Lívia Revoredo - Advocacia">
+    <meta property="og:description" content="Dra. Lívia Revoredo - Advocacia e Consultoria Jurídica especializada em Direito Trabalhista, Benefícios Previdenciários e Direito do Consumidor.">
+    <meta name="description" content="Dra. Lívia Revoredo - Advocacia e Consultoria Jurídica especializada em Direito Trabalhista, Benefícios Previdenciários e Direito do Consumidor. Agende uma consulta online.">
     <title>Seu Direito na Prática | Lívia Revoredo - Advocacia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <header>
@@ -88,36 +91,42 @@
 <!-- Modal de Agendamento -->
 <div id="modal-agendamento" class="modal hidden">
     <div class="modal-content">
-        <button id="btn-fechar" class="close-modal"></button> <!-- Aqui dentro -->
+        <button id="btn-fechar" class="close-modal"></button>
         <h3 id="pergunta-agendamento">Por onde você prefere fazer o agendamento?</h3>
         <div id="escolha-agendamento" class="escolha-agendamento">
             <button id="btn-whatsapp" class="agendamento-btn">Agendamento por WhatsApp</button>
             <button id="btn-site" class="agendamento-btn">Agendamento pelo Site</button>
         </div>
 
-        <!-- Formulário de Agendamento pelo Site -->
+
+         <!-- Formulário de Agendamento pelo Site -->
         <div id="form-agendamento" class="hidden">
-            <button id="btn-voltar" class="back-btn">← Voltar</button>
+            <button id="btn-voltar" class="back-btn" aria-label="Voltar">←</button>
             <h3>Preencha os dados para o agendamento</h3>
             <form id="agendamento-form">
-                <label for="nome">Nome Completo:</label>
-                <input type="text" id="nome" name="nome" required>
+                <div class="input-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
 
-                <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" required>
+                <div class="input-group">
+                    <label for="idade">Idade:</label>
+                    <input type="number" id="idade" name="idade" min="18" max="120" required>
+                </div>
 
-                <label for="contato">Email ou Telefone:</label>
-                <input type="text" id="contato" name="contato" required>
+                <div class="input-group">
+                    <label for="contato">Email ou Telefone:</label>
+                    <input type="text" id="contato" name="contato" required>
+                </div>
 
-                <label for="assunto">Assunto:</label>
-                <textarea id="assunto" name="assunto" rows="3" required></textarea>
+                <div class="input-group">
+                    <label for="assunto">Assunto:</label>
+                    <textarea id="assunto" name="assunto" rows="3" required></textarea>
+                </div>
 
                 <button type="submit" class="agendamento-btn">Enviar</button>
             </form>
-
-
-            <!-- Mensagem de sucesso -->
-            <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso! A Dra. Lívia entrará em contato assim que possível.</p>
+            <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso!</p>
         </div>
     </div>
 </div>

@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const perguntaAgendamento = document.getElementById("pergunta-agendamento");
     const mensagemSucesso = document.getElementById("mensagem-sucesso");
 
+
     // Função para abrir o modal
     function abrirModal() {
         modal.classList.remove("hidden");
@@ -131,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Abrir o modal ao clicar em "Agendamento Online"
     btnAgendamento.addEventListener("click", abrirModal);
 
-     // Evento para fechar o modal ao clicar no botão "X"
-     btnFechar.addEventListener("click", fecharModal);
+    // Evento para fechar o modal ao clicar no botão "X"
+    btnFechar.addEventListener("click", fecharModal);
 
     // Redirecionar para WhatsApp
     btnWhatsApp.addEventListener("click", function () {
@@ -141,60 +142,92 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Exibir o formulário e esconder a pergunta inicial
     btnSite.addEventListener("click", function () {
-        escolhaAgendamento.classList.add("hidden");
-        perguntaAgendamento.style.display = "none";
-        formAgendamento.classList.remove("hidden");
-        setTimeout(() => formAgendamento.classList.add("show"), 10);
+        escolhaAgendamento.style.opacity = "0";
+        escolhaAgendamento.style.visibility = "hidden";
+        setTimeout(() => {
+            escolhaAgendamento.classList.add("hidden");
+            formAgendamento.classList.remove("hidden");
+            setTimeout(() => formAgendamento.classList.add("show"), 10);
+        }, 300);
     });
 
-    // Voltar para a escolha inicial
+    // Voltar para a escolha de agendamento
     btnVoltar.addEventListener("click", function () {
         formAgendamento.classList.remove("show");
         setTimeout(() => {
             formAgendamento.classList.add("hidden");
             escolhaAgendamento.classList.remove("hidden");
-            perguntaAgendamento.style.display = "block"; // Exibir a pergunta novamente
+            escolhaAgendamento.style.opacity = "1";
+            escolhaAgendamento.style.visibility = "visible";
         }, 300);
     });
 
-    // Envio do formulário via EmailJS
-    if (formAgendamento) {
-        formAgendamento.addEventListener("submit", function (event) {
-            event.preventDefault();
+    formAgendamento.addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    const loading = document.createElement('div');
+    loading.className = 'loading';
+    this.appendChild(loading);
+
+    emailjs.sendForm("service_qmujy7o", "template_76bts8q", this)
+    .then(() => {
+        mensagemSucesso.classList.add("show");
+        setTimeout(() => {
+            fecharModal();
+            formAgendamento.reset();
+            mensagemSucesso.classList.remove("show");
+        }, 2000);
+    })
+    .catch((error) => {
+        alert("Erro: " + JSON.stringify(error));
+    })
+    .finally(() => {
+        loading.remove();
+    });
+});
+
+    btnVoltar.addEventListener("click", function () {
+        formAgendamento.classList.remove("show");
+        setTimeout(() => {
+            formAgendamento.classList.add("hidden");
+            escolhaAgendamento.classList.remove("hidden");
+            escolhaAgendamento.style.opacity = "1";
+            escolhaAgendamento.style.visibility = "visible";
+        }, 300);
+    });
+
+    const textarea = document.getElementById('assunto');
+if (textarea) {
+    textarea.addEventListener('input', function() {
+        this.style.height = 'auto'; 
+        this.style.height = this.scrollHeight + 'px'; 
+    });
+}
+
+     // Envio do formulário via EmailJS
+     formAgendamento.addEventListener("submit", function (event) {
+        event.preventDefault();
         
-            const nome = document.getElementById("nome").value.trim();
-            const idade = document.getElementById("idade").value.trim();
-            const contato = document.getElementById("contato").value.trim();
-            const assunto = document.getElementById("assunto").value.trim();
-        
-            if (!nome || !idade || !contato || !assunto) {
-                alert("Por favor, preencha todos os campos.");
-                return;
-            }
-        
-            emailjs.send("service_qmujy7o", "template_76bts8q", {
-                from_name: nome,
-                age: idade,
-                reply_to: contato,
-                message: assunto
-            }).then(
-                function (response) {
-                    console.log("Email enviado com sucesso!", response);
-                    mensagemSucesso.classList.add("show");
-        
-                    setTimeout(function () {
-                        fecharModal();
-                        formAgendamento.reset();
-                        mensagemSucesso.classList.remove("show");
-                    }, 3000); // Reduzido para 3 segundos
-                },
-                function (error) {
-                    console.error("Erro ao enviar email:", error);
-                    alert("Ocorreu um erro ao enviar o agendamento. Tente novamente.");
-                }
-            );
+        const loading = document.createElement('div');
+        loading.className = 'loading';
+        this.appendChild(loading);
+
+        emailjs.sendForm("service_qmujy7o", "template_76bts8q", this)
+        .then(() => {
+            mensagemSucesso.classList.add("show");
+            setTimeout(() => {
+                fecharModal();
+                formAgendamento.reset();
+                mensagemSucesso.classList.remove("show");
+            }, 2000);
+        })
+        .catch((error) => {
+            alert("Erro: " + JSON.stringify(error));
+        })
+        .finally(() => {
+            loading.remove();
         });
-    }
+    });
 });
 
 
