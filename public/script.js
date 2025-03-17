@@ -16,9 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
     checkScroll();
 });
 
+//areas de atuação
+
 document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".area-btn");
     const descriptionContainer = document.getElementById("area-description");
+    const areaContainer = document.querySelector(".areas-container"); // Pegamos a div das áreas
 
     const descriptions = {
         trabalhista: `
@@ -38,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     buttons.forEach(button => {
         button.addEventListener("click", function () {
             const areaKey = this.getAttribute("data-area");
-
+    
             if (descriptionContainer.dataset.current === areaKey) {
                 // Se a mesma área já estiver aberta, fecha
                 descriptionContainer.classList.remove("active");
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     descriptionContainer.style.display = "none";
                     descriptionContainer.innerHTML = "";
-                }, 300);
+                }, 300); // Tempo para a transição de fechamento
             } else {
                 // Esconde qualquer descrição anterior
                 descriptionContainer.classList.remove("active");
@@ -55,11 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     descriptionContainer.style.display = "block";
                     setTimeout(() => descriptionContainer.classList.add("active"), 10);
                     descriptionContainer.dataset.current = areaKey;
-                }, 300);
+                }, 300); // Tempo para a transição de abertura
             }
         });
     });
 });
+
+
+
+
+
 
 document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", function (e) {
@@ -69,7 +77,19 @@ document.querySelectorAll("nav a").forEach(link => {
         const targetSection = document.getElementById(targetId);
 
         if (targetSection) {
-            const offset = window.innerHeight / 5.5;
+            let offset = 0;
+
+            // Ajuste o offset para cada seção específica
+            if (targetId === "areas") {
+                offset = window.innerHeight * 0.1;
+            } else if (targetId === "sobre") {
+                offset = window.innerHeight * 0.19;
+            } else if (targetId === "contato") {
+                offset = window.innerHeight * 0.26;
+            } else {
+                offset = window.innerHeight * 0.1;
+            }
+
             const targetPosition = targetSection.offsetTop - offset;
 
             window.scrollTo({
@@ -79,6 +99,8 @@ document.querySelectorAll("nav a").forEach(link => {
         }
     });
 });
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("modal-agendamento");
@@ -100,31 +122,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para fechar o modal
     function fecharModal() {
-        modal.classList.remove("show"); // Remove a classe que exibe o modal
-        modal.style.opacity = "0"; // Adiciona transição suave
+        modal.classList.remove("show");
         setTimeout(() => {
-            modal.classList.add("hidden"); // Oculta completamente após a transição
-            escolhaAgendamento.classList.remove("hidden");
-            formAgendamento.classList.remove("show");
-            formAgendamento.classList.add("hidden");
-            perguntaAgendamento.style.display = "block";
-        }, 300); // Tempo para animação de fade-out
+            modal.classList.add("hidden");
+        }, 300); // Tempo para a transição de fechamento
     }
 
     // Abrir o modal ao clicar em "Agendamento Online"
     btnAgendamento.addEventListener("click", abrirModal);
 
      // Evento para fechar o modal ao clicar no botão "X"
-     btnFechar.addEventListener("click", function () {
-        modal.classList.remove("show");
-        modal.classList.add("hidden");
-
-        setTimeout(() => {
-            document.getElementById("escolha-agendamento").classList.remove("hidden");
-            document.getElementById("form-agendamento").classList.add("hidden");
-            document.getElementById("pergunta-agendamento").style.display = "block";
-        }, 300);
-    });
+     btnFechar.addEventListener("click", fecharModal);
 
     // Redirecionar para WhatsApp
     btnWhatsApp.addEventListener("click", function () {
@@ -134,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Exibir o formulário e esconder a pergunta inicial
     btnSite.addEventListener("click", function () {
         escolhaAgendamento.classList.add("hidden");
-        perguntaAgendamento.style.display = "none"; // Esconde a pergunta
+        perguntaAgendamento.style.display = "none";
         formAgendamento.classList.remove("hidden");
         setTimeout(() => formAgendamento.classList.add("show"), 10);
     });
@@ -153,13 +161,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (formAgendamento) {
         formAgendamento.addEventListener("submit", function (event) {
             event.preventDefault();
-
-            const nome = document.getElementById("nome").value;
-            const idade = document.getElementById("idade").value;
-            const contato = document.getElementById("contato").value;
-            const assunto = document.getElementById("assunto").value;
-
-            emailjs.send("service_xxxxx", "template_xxxxx", {
+        
+            const nome = document.getElementById("nome").value.trim();
+            const idade = document.getElementById("idade").value.trim();
+            const contato = document.getElementById("contato").value.trim();
+            const assunto = document.getElementById("assunto").value.trim();
+        
+            if (!nome || !idade || !contato || !assunto) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+        
+            emailjs.send("service_qmujy7o", "template_76bts8q", {
                 from_name: nome,
                 age: idade,
                 reply_to: contato,
@@ -168,17 +181,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 function (response) {
                     console.log("Email enviado com sucesso!", response);
                     mensagemSucesso.classList.add("show");
-
+        
                     setTimeout(function () {
                         fecharModal();
                         formAgendamento.reset();
                         mensagemSucesso.classList.remove("show");
-                    }, 10000);
+                    }, 3000); // Reduzido para 3 segundos
                 },
                 function (error) {
                     console.error("Erro ao enviar email:", error);
+                    alert("Ocorreu um erro ao enviar o agendamento. Tente novamente.");
                 }
             );
         });
     }
 });
+
+
