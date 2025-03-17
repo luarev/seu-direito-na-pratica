@@ -482,19 +482,24 @@ footer {
     opacity: 1;
 }
 
+
+
 /* Conteúdo do Modal */
 .modal-content {
-    width: 500px;
-    max-width: 90%;
-    padding: 20px;
+    width: 400px; /* Largura fixa para consistência */
+    max-width: 90%; /* Responsivo em telas menores */
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
     background: white;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-    transform: scale(0.9);
-    opacity: 0;
+    border: 2px solid #bc9c22; /* Borda dourada */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* Efeito de brilho */
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    position: relative; /* Para o botão de fechar */
+    margin: auto;
 }
+
+
 
 .modal.show .modal-content {
     transform: scale(1);
@@ -550,11 +555,11 @@ footer {
     gap: 20px;
     margin-top: 20px;
     width: 100%;
-    max-width: 400px; /* Limita a largura máxima */
+    max-width: 400px;
     padding: 20px;
-    background-color: white;
+    background-color: transparent; /* Remove o fundo branco */
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* Remove a sombra */
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
 }
@@ -586,6 +591,29 @@ footer {
 }
 
 /* Botões da Escolha de Agendamento */
+
+.agendamento-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #bc9c22;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: black;
+    color: #bc9c22;
+    text-align: center;
+    box-shadow: 0px 0px 10px black;
+}
+
+
+.agendamento-btn:hover {
+    background: #bc9c22;
+    color: black;
+    box-shadow: 0px 0px 10px #bc9c22;
+}
+
 
 .agendamento-btn[type="submit"] {
     width: auto;
@@ -656,14 +684,11 @@ footer {
     padding: 20px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     margin: 0 auto;
 }
-
-
 
 #form-agendamento.show {
     opacity: 1;
@@ -692,7 +717,7 @@ footer {
 #form-agendamento input,
 #form-agendamento textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
