@@ -460,6 +460,29 @@ footer {
 
 
 /* Modal - Janela Principal */
+
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
 .modal {
     display: flex;
     align-items: center;
@@ -473,12 +496,22 @@ footer {
     z-index: 1000;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .modal.show {
     visibility: visible;
     opacity: 1;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+    animation: modalFadeIn 0.3s ease-in-out;
+}
+
+.modal.hide .modal-content {
+    animation: modalFadeOut 0.3s ease-in-out;
 }
 
 
@@ -487,15 +520,24 @@ footer {
 .modal-content {
     background: white;
     border-radius: 10px;
-    padding: 2rem;
+    padding: 20px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
     position: relative;
-    min-width: 300px;
-    max-width: 90%;
-    transform: scale(0.9);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 15px rgba(188, 156, 34, 0.3);
-    border: 1px solid #bc9c22;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 1;
+}
+
+
+/* Diferenciar os dois modais */
+#modal-agendamento .modal-content {
+    border: 2px solid #bc9c22;
+}
+
+
+#modal-formulario .modal-content {
+    border: 2px solid #bc9c22;
 }
 
 .modal-formulario {
@@ -515,16 +557,68 @@ footer {
     z-index: 1100;
 }
 
-.modal.show .modal-content {
-    transform: scale(1);
-}
-
 .modal-content h3 {
     font-size: 20px;
     color: black;
     font-family: 'Times New Roman', serif;
     font-weight: bold;
     margin-bottom: 20px;
+}
+
+#modal-formulario label {
+    font-family: 'Times New Roman', serif; /* Fonte principal */
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#modal-formulario input,
+#modal-formulario textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: 'Times New Roman', serif;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#modal-formulario input:focus,
+#modal-formulario textarea:focus {
+    border-color: #bc9c22;
+    outline: none;
+}
+
+/* Botão "Enviar" - Mesmo estilo dos botões de agendamento */
+#modal-formulario button[type="submit"] {
+    width: 100%; /* Igual às caixas de entrada */
+    padding: 12px;
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #bc9c22;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: black;
+    color: #bc9c22;
+    text-align: center;
+    box-shadow: 0px 0px 10px black;
+}
+
+#modal-formulario button[type="submit"]:hover {
+    background: #bc9c22;
+    color: black;
+    box-shadow: 0px 0px 10px #bc9c22;
+}
+
+#modal-formulario .modal-content {
+    max-height: 90vh; /* Mantém o tamanho fixo do modal */
+    overflow-y: auto; /* Permite rolagem interna se necessário */
+    padding-bottom: 20px;
 }
 
 .close-modal {
@@ -647,13 +741,29 @@ footer {
 }
 
 #btn-voltar {
-    position: static;
-    margin-top: 1rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #bc9c22;
+    background: black;
+    color: #bc9c22;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 #btn-voltar:hover {
     background: #bc9c22;
     color: black;
+    box-shadow: 0px 0px 10px #bc9c22;
 }
 
 .loading {
@@ -675,24 +785,21 @@ footer {
 
 /* Estilo do Formulário */
 #form-agendamento {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    max-width: 400px;
     padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
 }
 
+
 #form-agendamento.show {
+    display: block;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+}
+
+#form-agendamento.hidden {
+    display: none !important;
 }
 
 #form-agendamento h3 {
@@ -702,8 +809,16 @@ footer {
     text-align: center;
 }
 
-#form-agendamento .input-group {
-    margin-bottom: 20px;
+.input-group {
+    margin: 15px 0;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input, textarea {
+    width: 100% !important;
+    box-sizing: border-box;
 }
 
 #form-agendamento label {
@@ -754,9 +869,11 @@ footer {
 }
 
 #assunto {
-    max-width: 100%;
-    height: 80px;
-    resize: vertical;
+    resize: none; /* Impede redimensionamento manual */
+    overflow: hidden; /* Evita barras de rolagem horizontais */
+    min-height: 60px;
+    max-height: 300px; /* Limite máximo para evitar um modal muito grande */
+    font-family: 'Times New Roman', serif;
 }
 
 /* Mensagem de Sucesso */
@@ -772,27 +889,6 @@ footer {
 #mensagem-sucesso.show {
     opacity: 1;
 }
-
-
-/* Botão de Voltar */
-
-
-.back-btn {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.back-btn:hover {
-    color: #bc9c22;
-}
-
 
 @media (max-width: 768px) {
     .hero h2 {

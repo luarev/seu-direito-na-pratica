@@ -92,6 +92,8 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.890227120114!2d-34.881038925621!3d-8.057838392252385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab18b90a7e8893%3A0xe1d8b0dbe2f5899d!2sR.%20da%20Aurora%2C%20295%20-%20Boa%20Vista%2C%20Recife%20-%20PE%2C%2050005-140!5e0!3m2!1sen!2sbr!4v1649783204907!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
+    
+
 <!-- Modal de Agendamento -->
 <div id="modal-agendamento" class="modal hidden">
     <div class="modal-content">
@@ -101,40 +103,41 @@
             <button id="btn-whatsapp" class="agendamento-btn">Agendamento por WhatsApp</button>
             <button id="btn-site" class="agendamento-btn">Agendamento pelo Site</button>
         </div>
-
-        <!-- Formulário de Agendamento pelo Site -->
-        <div id="form-agendamento" class="hidden">
-            <button id="btn-voltar" class="back-btn" aria-label="Voltar">←</button>
-            <h3>Preencha os dados para o agendamento</h3>
-            <form id="agendamento-form">
-                <div class="input-group">
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="idade">Idade:</label>
-                    <input type="number" id="idade" name="idade" min="18" max="120" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="contato">Email ou Telefone:</label>
-                    <input type="text" id="contato" name="contato" pattern="[^@\s]+@[^@\s]+\.[^@\s]+|\d{10,11}" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="assunto">Assunto:</label>
-                    <textarea id="assunto" name="assunto" rows="3" required></textarea>
-                </div>
-
-                <button type="submit" class="agendamento-btn">Enviar</button>
-            </form>
-            <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso!</p>
-        </div>
     </div>
 </div>
 
+<!-- Novo Modal: Formulário de Agendamento pelo Site -->
+<div id="modal-formulario" class="modal hidden">
+    <div class="modal-content">
+        <button id="btn-voltar" class="back-btn">←</button>
+        <button id="btn-fechar-formulario" class="close-modal"></button>
+        <h3>Preencha os dados para o agendamento</h3>
+        <form id="agendamento-form">
+            <div class="input-group">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
 
+            <div class="input-group">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" min="18" max="120" required>
+            </div>
+
+            <div class="input-group">
+                <label for="contato">Email ou Telefone:</label>
+                <input type="text" id="contato" name="contato" required>
+            </div>
+
+            <div class="input-group">
+                <label for="assunto">Assunto:</label>
+                <textarea id="assunto" name="assunto" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="agendamento-btn">Enviar</button>
+        </form>
+        <p id="mensagem-sucesso" class="hidden">Agendamento enviado com sucesso!</p>
+    </div>
+</div>
 
 
     <footer>
