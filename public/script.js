@@ -104,8 +104,6 @@ document.querySelectorAll("nav a").forEach(link => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JavaScript carregado corretamente!");
-
     const modalAgendamento = document.getElementById("modal-agendamento");
     const modalFormulario = document.getElementById("modal-formulario");
     const btnAgendamento = document.getElementById("btn-agendamento");
@@ -113,77 +111,103 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnFecharFormulario = document.getElementById("btn-fechar-formulario");
     const btnWhatsApp = document.getElementById("btn-whatsapp");
     const btnSite = document.getElementById("btn-site");
-    const formAgendamento = document.getElementById('agendamento-form');
+    const formAgendamento = document.getElementById("agendamento-form");
     const btnVoltar = document.getElementById("btn-voltar");
     const mensagemSucesso = document.getElementById("mensagem-sucesso");
+    const campoContato = formAgendamento.querySelector('[name="contato"]');
 
-    // ⚡ Função para abrir um modal com transição suave
+    // Abrir/fechar modal
     function abrirModal(modal) {
         modal.classList.remove("hidden", "hide");
         modal.classList.add("show");
     }
 
-    // ❌ Função para fechar um modal com animação
     function fecharModal(modal) {
         modal.classList.remove("show");
         modal.classList.add("hide");
         setTimeout(() => modal.classList.add("hidden"), 300);
     }
 
-    // 🎯 Evento do botão de agendamento na navbar
-    btnAgendamento.addEventListener("click", function (e) {
+    btnAgendamento.addEventListener("click", e => {
         e.preventDefault();
         abrirModal(modalAgendamento);
     });
 
-    // ❌ Evento para fechar os modais ao clicar no botão X
     btnFecharAgendamento.addEventListener("click", () => fecharModal(modalAgendamento));
     btnFecharFormulario.addEventListener("click", () => fecharModal(modalFormulario));
+    btnVoltar.addEventListener("click", () => {
+        fecharModal(modalFormulario);
+        setTimeout(() => abrirModal(modalAgendamento), 200);
+    });
 
-    // ✅ Botão de WhatsApp - Redirecionamento
-    btnWhatsApp.addEventListener("click", function () {
-        console.log("Redirecionando para WhatsApp...");
+    btnWhatsApp.addEventListener("click", () => {
         window.open("https://wa.me/5581995369027", "_blank");
     });
 
-    // ✅ Botão de Agendamento pelo Site - Abre o modal do formulário e fecha o modal principal
-    btnSite.addEventListener("click", function () {
+    btnSite.addEventListener("click", () => {
         fecharModal(modalAgendamento);
-        setTimeout(() => abrirModal(modalFormulario), 300);
+        setTimeout(() => abrirModal(modalFormulario), 200);
     });
 
-    // 🔙 Botão de Voltar ao menu de agendamento
-    btnVoltar.addEventListener("click", function () {
-        fecharModal(modalFormulario);
-        setTimeout(() => abrirModal(modalAgendamento), 300);
-    });
-
-    // 📩 Envio do formulário com emailJS
+    // ✅ MOSTRA erro ao enviar
     formAgendamento.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const loading = document.createElement('div');
-        loading.className = 'loading';
+        const valor = campoContato.value.trim();
+        const apenasNumeros = valor.replace(/\D/g, "");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const telefoneRegex = /^(\(?\d{2}\)?\s?)?9?\d{4}-?\d{4}$/;
+
+        const erroAntigo = campoContato.parentElement.querySelector(".erro-validacao");
+        if (erroAntigo) erroAntigo.remove();
+        campoContato.classList.remove("erro");
+
+        if (
+            (!emailRegex.test(valor) && !telefoneRegex.test(valor)) ||
+            apenasNumeros.length < 8 ||
+            apenasNumeros.length > 11
+        ) {
+            const erro = document.createElement("span");
+            erro.className = "erro-validacao";
+            erro.textContent = "Digite um telefone ou e-mail válido.";
+            campoContato.classList.add("erro");
+            campoContato.parentElement.appendChild(erro);
+            return;
+        }
+
+        // Mostra loading
+        const loading = document.createElement("div");
+        loading.className = "loading";
         this.appendChild(loading);
 
-        emailjs.sendForm("service_qmujy7o", "template_76bts8q", this)
-        .then(() => {
-            mensagemSucesso.classList.add("show");
-            setTimeout(() => {
-                fecharModal(modalFormulario);
-                formAgendamento.reset();
-                mensagemSucesso.classList.remove("show");
-            }, 2000);
-        })
-        .catch((error) => {
-            alert("Erro ao enviar: " + JSON.stringify(error));
-        })
-        .finally(() => {
-            loading.remove();
-        });
+        // Envia com EmailJS
+        emailjs.sendForm("service_qmujy7o", "template_j5p7jkb", this)
+            .then(() => {
+                mensagemSucesso.classList.remove("hidden");
+                mensagemSucesso.classList.add("show");
+                setTimeout(() => {
+                    formAgendamento.reset();
+                    mensagemSucesso.classList.remove("show");
+                    mensagemSucesso.classList.add("hidden");
+                }, 2000);
+            })
+            .catch((error) => {
+                alert("Erro ao enviar: " + JSON.stringify(error));
+            })
+            .finally(() => {
+                loading.remove();
+            });
     });
 
-    // 🚀 Permitir fechar os modais ao clicar fora
+    // Remove o erro SOMENTE quando o usuário clica no campo
+    campoContato.addEventListener("focus", () => {
+        campoContato.classList.remove("erro");
+        const erro = campoContato.parentElement.querySelector(".erro-validacao");
+        if (erro) erro.remove();
+    });
+});
+
+    // Clicar fora do modal para fechar
     window.addEventListener("click", function (event) {
         if (event.target === modalAgendamento) {
             fecharModal(modalAgendamento);
@@ -191,15 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
             fecharModal(modalFormulario);
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+    // Crescimento automático do textarea
     const textarea = document.getElementById("assunto");
-
     if (textarea) {
         textarea.addEventListener("input", function () {
             this.style.height = "auto";
-            this.style.height = Math.min(this.scrollHeight, 300) + "px"; // Cresce até 300px
+            this.style.height = Math.min(this.scrollHeight, 300) + "px";
         });
     }
-});
