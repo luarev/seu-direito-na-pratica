@@ -141,14 +141,14 @@ document.addEventListener("DOMContentLoaded", function () {
   formAgendamento.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const tipoContato = document.getElementById("contatoTipo").value;
+    const tipoContato = document.getElementById("tipoContato").value;
     const valor = campoContato.value.trim();
     const apenasNumeros = valor.replace(/\D/g, "");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telefoneRegex = /^(\(?\d{2}\)?\s?)?9?\d{4}-?\d{4}$/;
 
-    const erroAntigo =
-      campoContato.parentElement.querySelector(".erro-validacao");
+    const containerErro = campoContato.closest(".input-group");
+    const erroAntigo = containerErro.querySelector(".erro-validacao");
     if (erroAntigo) erroAntigo.remove();
     campoContato.classList.remove("erro");
 
@@ -171,9 +171,10 @@ document.addEventListener("DOMContentLoaded", function () {
       erro.className = "erro-validacao";
       erro.textContent = mensagemErro;
       campoContato.classList.add("erro");
-      campoContato.parentElement.appendChild(erro);
+      containerErro.appendChild(erro);
       return;
     }
+
     const loading = document.createElement("div");
     loading.className = "loading";
     this.appendChild(loading);
@@ -202,33 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const erro = campoContato.parentElement.querySelector(".erro-validacao");
     if (erro) erro.remove();
   });
-});
-
-document.getElementById("form").addEventListener("submit", function (e) {
-  const tipo = document.getElementById("contatoTipo").value;
-  const valor = document.getElementById("contato").value.trim();
-  const erro = document.getElementById("contatoErro");
-  let valido = false;
-
-  if (tipo === "email") {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    valido = regexEmail.test(valor);
-    erro.textContent = valido
-      ? ""
-      : "Digite um e-mail válido (ex: nome@email.com)";
-  } else if (tipo === "telefone") {
-    const regexTelefone = /^[0-9]{10,15}$/;
-    valido = regexTelefone.test(valor);
-    erro.textContent = valido
-      ? ""
-      : "Digite um telefone válido com DDD (somente números)";
-  } else {
-    erro.textContent = "Selecione o tipo de contato";
-  }
-
-  if (!valido) {
-    e.preventDefault();
-  }
 });
 
 window.addEventListener("click", function (event) {
