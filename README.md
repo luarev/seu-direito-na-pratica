@@ -30,7 +30,7 @@ Este site foi idealizado para centralizar informações importantes sobre o escr
 
 ## 📄 Licença
 
-Este projeto é de uso privado/comercial da cliente. Código aberto apenas para fins de portfólio e aprendizado.
+Este projeto é de uso privado/comercial da cliente. Código aberto apenas para fins de portfólio.
 
 ---
 
