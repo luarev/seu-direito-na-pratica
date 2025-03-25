@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.appendChild(loading);
 
         // Envia com EmailJS
-        emailjs.sendForm("service_qmujy7o", "template_j5p7jkb", this)
+        emailjs.sendForm("service_osjcimo", "template_j5p7jkb", formAgendamento)
             .then(() => {
                 mensagemSucesso.classList.remove("hidden");
                 mensagemSucesso.classList.add("show");
